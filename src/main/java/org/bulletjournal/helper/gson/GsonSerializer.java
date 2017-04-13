@@ -11,13 +11,14 @@ import com.google.gson.GsonBuilder;
  */
 public class GsonSerializer {
 
-    private static Gson gson = new GsonBuilder().setExclusionStrategies(new GsonExclusionStrategy()).setPrettyPrinting().create();
+    private static Gson gson = new GsonBuilder().setPrettyPrinting()
+            .setExclusionStrategies(new GsonExclusionStrategy()).create();
 
     public static <T> String serializeToJson(T src){
         return gson.toJson(src);
     }
 
-    public static <T> T containsAll(String json, Class<T> clasz){
+    public static <T> T deserializeJson(String json, Class<T> clasz){
         return gson.fromJson(json, clasz);
     }
 }
