@@ -14,12 +14,13 @@ import java.net.URL;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 /**
  * @author teodora.bobirneci
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = RANDOM_PORT)
 public class WebControllerIT {
 
     private URL base;
@@ -38,6 +39,6 @@ public class WebControllerIT {
     @Test
     public void testEndpoint() throws Exception {
         ResponseEntity<String> response = template.getForEntity(base.toString(), String.class);
-//        assertThat(response.getBody(), equalTo("Greetings from Spring Boot!"));
+        assertThat(response.getBody(), equalTo("Greetings from Spring Boot!"));
     }
 }

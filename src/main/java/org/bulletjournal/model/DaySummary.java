@@ -1,11 +1,12 @@
-package com.mybulletjournalapp.model;
-
-import org.hibernate.annotations.Type;
+package org.bulletjournal.model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+
+import static javax.persistence.GenerationType.AUTO;
+import static javax.persistence.TemporalType.DATE;
 
 /**
  * @author teodora.bobirneci
@@ -13,7 +14,7 @@ import java.util.Date;
 @Entity
 @Table(name = "day_summaries")
 public class DaySummary {
-    private Long id;
+    private Integer id;
     private Date day;
     private Collection<Task> tasks;
     private Collection<Appointment> appointments;
@@ -28,18 +29,18 @@ public class DaySummary {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = AUTO)
     @Column(name = "DAY_ID")
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
     @Column(name = "DAY")
-    @Type(type="date")
+    @Temporal(DATE)
     public Date getDay() {
         return day;
     }

@@ -1,4 +1,4 @@
-package com.mybulletjournalapp.rest;
+package org.bulletjournal.controller;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,9 +9,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.hamcrest.core.IsEqual.equalTo;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
@@ -29,6 +27,5 @@ public class WebControllerTest {
     public void testEndpoint() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/").accept(APPLICATION_JSON))
                 .andExpect(status().isOk());
-//                .andExpect(content().string(equalTo("Greetings from Spring Boot!")));
     }
 }

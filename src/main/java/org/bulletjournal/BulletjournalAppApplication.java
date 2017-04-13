@@ -1,16 +1,13 @@
-package com.mybulletjournalapp;
+package org.bulletjournal;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-/**
- * @author teodora.bobirneci
- */
 @SpringBootApplication
-public class Application {
+public class BulletjournalAppApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(BulletjournalAppApplication.class, args);
     }
 
 }

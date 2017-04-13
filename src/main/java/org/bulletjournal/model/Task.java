@@ -1,41 +1,37 @@
-package com.mybulletjournalapp.model;
+package org.bulletjournal.model;
 
-import com.google.common.base.Joiner;
+import org.bulletjournal.helper.gson.GsonExclude;
 
 import javax.persistence.*;
-import java.util.List;
-
-import static com.google.common.collect.Lists.newArrayList;
-import static java.util.stream.Collectors.toList;
 
 /**
  * @author teodora.bobirneci
  */
 @Entity
-@Table(name = "appointments")
-public class Appointment {
-    private Long id;
+@Table(name = "tasks")
+public class Task {
+    private Integer id;
     private String title;
     private String description;
-    private String participantsCSV;
+    @GsonExclude
     private DaySummary daySummary;
 
-    public Appointment() {
+    public Task() {
     }
 
-    public Appointment(String title, String description) {
+    public Task(String title, String description) {
         this.title = title;
         this.description = description;
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "APPOINTMENT_ID")
-    public Long getId() {
+    @Column(name = "TASK_ID")
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -57,25 +53,6 @@ public class Appointment {
         this.description = description;
     }
 
-    @Transient
-    public List<String> getParticipants() {
-        return newArrayList(participantsCSV.split(","));
-    }
-
-    @Transient
-    public void setParticipants(List<String> participants) {
-        this.participantsCSV = Joiner.on(',').join(participants.stream().map(String::trim).collect(toList()));
-    }
-
-    @Column(name = "PARTICIPANTS")
-    private String getParticipantsCSV() {
-        return participantsCSV;
-    }
-
-    private void setParticipantsCSV(String participantsCSV) {
-        this.participantsCSV = participantsCSV;
-    }
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "DAY_ID", nullable = false)
     public DaySummary getDaySummary() {
@@ -88,11 +65,10 @@ public class Appointment {
 
     @Override
     public String toString() {
-        return "Appointment{" +
+        return "Task{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", participantsCSV='" + participantsCSV + '\'' +
                 '}';
     }
 }
