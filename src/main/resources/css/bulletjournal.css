@@ -1,0 +1,17 @@
+#weekOverview {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 10%;
+    border-style: solid;
+}
+
+thead td {
+    font-size: 20px;
+    text-align: center;
+    color: green;
+}
+
+td {
+    border-style: groove;
+}

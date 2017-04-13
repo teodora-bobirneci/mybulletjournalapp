@@ -1,24 +1,18 @@
 package org.bulletjournal.service;
 
-import org.bulletjournal.dao.DaySummaryRepository;
 import org.bulletjournal.model.DaySummary;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
+import java.text.ParseException;
+import java.util.Calendar;
+import java.util.List;
 
 /**
- * @author teodora.bobirneci
+ * @author Teodora Bobirneci
  */
-@Service
-public class BulletJournalService {
+public interface BulletJournalService {
 
-    private final DaySummaryRepository daySummaryRepository;
+    DaySummary doSave(DaySummary daySummary);
 
-    @Autowired
-    public BulletJournalService(DaySummaryRepository daySummaryRepository) {this.daySummaryRepository = daySummaryRepository;}
+    List<DaySummary> getSummaryForWeek(Calendar calendar) throws ParseException;
 
-    @Transactional
-    public DaySummary doSave(DaySummary daySummary){
-       return daySummaryRepository.save(daySummary);
-    }
 }

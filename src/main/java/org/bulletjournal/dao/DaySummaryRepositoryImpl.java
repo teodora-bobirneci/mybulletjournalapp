@@ -5,9 +5,12 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 
 import static javax.persistence.TemporalType.DATE;
+import static org.bulletjournal.helper.DateParser.parseDate;
 
 /**
  * @author Teodora Bobirneci
@@ -28,6 +31,14 @@ public class DaySummaryRepositoryImpl implements DaySummaryRepository {
         return entityManager.createQuery("from DaySummary ds where ds.day = :date", DaySummary.class)
                 .setParameter("date", date, DATE)
                 .getResultList().get(0);
+    }
+
+    @Override
+    public List<DaySummary> getSummaryForWeek(String[] daysFromGivenWeek) throws ParseException {
+        return entityManager.createQuery("from DaySummary ds where ds.day BETWEEN :startDate" +
+                " and :endDate ", DaySummary.class)
+                .setParameter("startDate", parseDate(daysFromGivenWeek[0]), DATE)
+                .setParameter("endDate", parseDate(daysFromGivenWeek[6]), DATE).getResultList();
     }
 
 }
