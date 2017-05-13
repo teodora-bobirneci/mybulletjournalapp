@@ -1,17 +1,58 @@
 #weekOverview {
     width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 10%;
-    border-style: solid;
+    margin: 20% 10%;
+    border: solid #c71585;
 }
 
-thead td {
-    font-size: 20px;
+body {
+    background-image: url(../img/background.jpg);
+    background-size: 100% 100%;
+    font-family: "Josefin Slab", Amaranth, "Old Standard TT", "Book Antiqua", Palatino, serif;
+}
+
+thead th {
+    font-size: xx-large;
+    font-style: italic;
     text-align: center;
-    color: green;
+    color: #8e24b1;
+    border: solid #c71585;
 }
 
 td {
-    border-style: groove;
+    border: groove #c71585 medium;
+    vertical-align: top;
+}
+
+.appointments {
+    width: 40%;
+    text-align: left;
+    font-size: large;
+}
+
+.appointment {
+    margin-left: 10px;
+    margin-top: 10px;
+    vertical-align: top;
+    color: #d28030;
+}
+
+.tasks {
+    width: 40%;
+    text-align: left;
+    font-family: cursive;
+    font-size: large;
+}
+
+.task {
+    margin-left: 10px;
+    margin-top: 10px;
+    vertical-align: top;
+    color: #d28721;
+}
+
+.day {
+    width: 20%;
+    text-align: center;
+    font-size: larger;
+    color: #1795b9;
 }
