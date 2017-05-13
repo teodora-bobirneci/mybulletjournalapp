@@ -1,6 +1,5 @@
 package org.bulletjournal.rest;
 
-import org.bulletjournal.helper.gson.GsonSerializer;
 import org.bulletjournal.model.DaySummary;
 import org.bulletjournal.service.BulletJournalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+import static org.bulletjournal.helper.gson.GsonSerializer.serializeToJson;
 
 /**
  * @author Teodora Bobirneci
@@ -38,11 +38,10 @@ public class WeekOverviewController {
         try {
             weekSummary = bulletJournalService.getSummaryForWeek(calendar);
         } catch (Exception e) {
-            return GsonSerializer.serializeToJson("Error: " + e.getMessage());
+            return serializeToJson("Error: " + e.getMessage());
         }
 
-        return GsonSerializer.serializeToJson(weekSummary.toArray());
+        return serializeToJson(weekSummary.toArray());
     }
-
 
 }
