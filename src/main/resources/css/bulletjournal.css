@@ -1,16 +1,16 @@
 #weekOverview {
     width: 80%;
-    margin: 20% 10%;
+    /*margin: 20% 10%;*/
     border: solid #c71585;
 }
 
 body {
-    background-image: url(../img/background.jpg);
+    /*background-image: url(../img/background.jpg);*/
     background-size: 100% 100%;
     font-family: "Josefin Slab", Amaranth, "Old Standard TT", "Book Antiqua", Palatino, serif;
 }
 
-thead th {
+#weekOverview thead th {
     font-size: xx-large;
     font-style: italic;
     text-align: center;
@@ -18,7 +18,7 @@ thead th {
     border: solid #c71585;
 }
 
-td {
+#weekOverview td {
     border: groove #c71585 medium;
     vertical-align: top;
 }

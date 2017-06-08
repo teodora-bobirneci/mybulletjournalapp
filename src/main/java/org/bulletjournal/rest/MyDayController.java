@@ -2,15 +2,17 @@ package org.bulletjournal.rest;
 
 
 import org.bulletjournal.dao.DaySummaryRepository;
+import org.bulletjournal.helper.DateParser;
 import org.bulletjournal.helper.gson.GsonSerializer;
 import org.bulletjournal.model.DaySummary;
+import org.bulletjournal.model.Task;
+import org.bulletjournal.rest.dto.TaskDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Produces;
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -37,9 +39,7 @@ public class MyDayController {
             calendar.set(Integer.parseInt(date[0]), Integer.parseInt(date[1]) - 1, Integer.parseInt(date[2]));
             Date parsed = calendar.getTime();
 
-            DaySummary daySummary = daySummaryRepository.findByDate(parsed);
-
-            return GsonSerializer.serializeToJson(daySummary);
+            return GsonSerializer.serializeToJson(daySummaryRepository.findByDate(parsed));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -48,6 +48,21 @@ public class MyDayController {
 
     private void validateDateFormat(String day) {
 
+    }
+
+    @PostMapping("/addTask")
+//    @Consumes(APPLICATION_FORM_URLENCODED)
+//    @Produces(MediaType.TEXT_PLAIN)
+    public String addTask(@ModelAttribute TaskDTO task) {
+        DaySummary daySummary;
+        try {
+            daySummary = daySummaryRepository.findByDate(DateParser.parseDate(task.getDate()));
+        } catch (ParseException e) {
+            return "Invalid date format!";
+        }
+        daySummary.addTask(new Task(task.getTitle(), task.getDescription()));
+        daySummaryRepository.save(daySummary);
+        return "OK";
     }
 
 }

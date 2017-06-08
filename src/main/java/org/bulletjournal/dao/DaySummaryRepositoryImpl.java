@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.text.ParseException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -28,9 +29,14 @@ public class DaySummaryRepositoryImpl implements DaySummaryRepository {
 
     @Override
     public DaySummary findByDate(Date date) {
-        return entityManager.createQuery("from DaySummary ds where ds.day = :date", DaySummary.class)
+        List<DaySummary> daySummaries = entityManager.createQuery("from DaySummary ds where ds.day = :date", DaySummary.class)
                 .setParameter("date", date, DATE)
-                .getResultList().get(0);
+                .getResultList();
+        if (!daySummaries.isEmpty()) {
+            return daySummaries.get(0);
+        } else {
+            return new DaySummary(Calendar.getInstance().getTime());
+        }
     }
 
     @Override

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add task</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="../js/jquery-dateformat.js"></script>
+    <script src="../js/bulletjournal.js"></script>
+
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css"/>
+    <!-- <link type="text/css" rel="stylesheet" href="../css/bulletjournal.css">-->
+
+    <script>
+        $(function () {
+            $("#datepicker").datepicker();
+        });
+    </script>
+</head>
+<body>
+<form id="addTaskForm" action="#" th:action="@{/learn/bulletjournalapp/templates/addTask}" th:object="${task}">
+    <fieldset>
+        <table>
+            <tr>
+                <td>Date:</td>
+                <td><input id="datepicker" name="date" th:field="*{date}" type="text" required="required" style="width: 99%"/></td>
+            </tr>
+            <tr>
+                <td>Task:</td>
+                <td><input id="title" name="title" th:field="*{title}" type="text" required="required" style="width: 99%"/></td>
+            </tr>
+            <tr>
+                <td valign="top">Description:</td>
+                <td><textarea id="description" name="description" th:field="*{description}" rows="10" maxlength="300"></textarea></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input id="addTaskSubmit" type="submit" value="Add"/></td>
+            </tr>
+        </table>
+    </fieldset>
+</form>
+</body>
+</html>
